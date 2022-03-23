@@ -8,8 +8,6 @@ import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.game.com.example.game.GameViewModel
 import com.example.game.databinding.FragmentGameBinding
@@ -71,7 +69,7 @@ class GameFragment : Fragment() {
 //                if (Storage.maxScore<Storage.score){  // in view model
 //                    Storage.maxScore=Storage.score
 //                }
-                gameViewModel.reset()
+                gameViewModel.resetQNumber()
                 findNavController().navigate(R.id.action_gameFragment_to_resultFragment)
 //                val intent= Intent(activity,Activity2::class.java)
 //                startActivity(intent)

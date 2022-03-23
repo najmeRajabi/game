@@ -12,7 +12,6 @@ class GameViewModel:ViewModel() {
 
     fun setScore(myScore:Int){
         score.value = myScore
-        setMaxScore(myScore)
     }
     fun setQuestionNumber(qNumber:Int){
         questionNumber.value = qNumber
@@ -20,8 +19,11 @@ class GameViewModel:ViewModel() {
     fun addQuestionNumber(){
         questionNumber.value = questionNumber.value?.plus(1)
     }
-    fun reset(){
+    fun resetQNumber(){
         questionNumber.value = 1
+    }
+    fun resetScore(){
+        score.value = 0
     }
     fun correctAnswer(){
         score.value = score.value?.plus(5)
@@ -29,9 +31,9 @@ class GameViewModel:ViewModel() {
     fun incorrectAnswer(){
         score.value = score.value?.minus(2)
     }
-    private fun setMaxScore(myScore: Int){
-        if (myScore > maxScore.value!!){
-            maxScore.value = myScore
+    fun setMaxScore(){
+        if (score.value!! > maxScore.value!!){
+            maxScore.value = score.value
         }
     }
 

@@ -1,20 +1,20 @@
 package com.example.game
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import com.example.game.com.example.game.GameViewModel
 import com.example.game.databinding.FragmentResultBinding
 import com.google.android.material.internal.ContextUtils
-import kotlin.system.exitProcess
 
 class ResultFragment : Fragment() {
 
     lateinit var binding: FragmentResultBinding
+    val resultViewModel: GameViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,20 +33,21 @@ class ResultFragment : Fragment() {
     }
     @SuppressLint("SetTextI18n")
     private fun initView() {
-        binding.scoreFinalTxv.text="your score is  ${Storage.score.toString()}"
-        binding.record .text="most score is  ${Storage.maxScore.toString()}"
+        resultViewModel.setMaxScore()
+        binding.scoreFinalTxv.text="your score is  ${resultViewModel.score.value.toString()}"
+        binding.record .text="max score is  ${resultViewModel.maxScore.value.toString()}"
 
         binding.exitBtn.setOnClickListener {
-            Storage.questionNumber=1
-            Storage.score=0
+            resultViewModel.resetQNumber()
+            resultViewModel.resetScore()
 
             exitApplication()
         }
 
 
         binding.replyBtn.setOnClickListener {
-            Storage.questionNumber=1
-            Storage.score=0
+            resultViewModel.resetQNumber()
+            resultViewModel.resetScore()
             activity?.onBackPressed()
 //            val intent= Intent(activity,MainActivity::class.java)
 //            startActivity(intent)
