@@ -7,13 +7,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.game.com.example.game.GameViewModel
 import com.example.game.databinding.FragmentGameBinding
 
 
 class GameFragment : Fragment() {
 
     lateinit var binding: FragmentGameBinding
+    val gameViewModel:GameViewModel by activityViewModels()
+//    val model = ViewModelProvider(requireActivity()).get(GameViewModel::class.java)
     var btnArray=ArrayList<Button>()
     var a=0
     var b=0
@@ -60,12 +66,12 @@ class GameFragment : Fragment() {
             dice()
         }
         binding.diceBtn.setOnClickListener {
-            Storage.questionNumber++
-            if (Storage.questionNumber>=6){
-                if (Storage.maxScore<Storage.score){
-                    Storage.maxScore=Storage.score
-                }
-                Storage.questionNumber=1
+            gameViewModel.addQuestionNumber()
+            if (gameViewModel.questionNumber.value!! >=6){
+//                if (Storage.maxScore<Storage.score){  // in view model
+//                    Storage.maxScore=Storage.score
+//                }
+                gameViewModel.reset()
                 findNavController().navigate(R.id.action_gameFragment_to_resultFragment)
 //                val intent= Intent(activity,Activity2::class.java)
 //                startActivity(intent)
@@ -90,7 +96,7 @@ class GameFragment : Fragment() {
         outState.putString("Button3" , binding.answer3Btn .text.toString())
         outState.putString("Button4" , binding.answer4Btn .text.toString())
         outState.putString("Score" , binding.scoreTxv.text.toString())
-        outState.putInt("questionNumber" ,Storage.questionNumber)
+        gameViewModel.questionNumber.value?.let { outState.putInt("questionNumber" , it) }
         outState.putBoolean("Enable" , binding.answer4Btn.isEnabled)
         for (button in btnArray){
             var s=button.isEnabled
@@ -105,7 +111,7 @@ class GameFragment : Fragment() {
             if (number == i){
                 btnArray[i].text =mode.toString()
             }else{
-                btnArray[i].text=Storage.getRandom().toString()
+                btnArray[i].text=gameViewModel.getRandom().toString()
             }
 
         }
@@ -115,16 +121,16 @@ class GameFragment : Fragment() {
     private fun correctAnswer(button: Button){
         if(button.text==mode.toString()){
             //Toast.makeText(this,"correct",Toast.LENGTH_SHORT).show()
-            Storage.score+=5
-            binding.scoreTxv.text=Storage.score.toString()
+            gameViewModel.correctAnswer()
+            binding.scoreTxv.text=gameViewModel.score.value.toString()
             activity?.let { ContextCompat.getColor(it, R.color.green) }
                 ?.let { button.setBackgroundColor(it) }
 
             disableButton()
         } else{
             //Toast.makeText(this,"incorrect",Toast.LENGTH_SHORT).show()
-            Storage.score-=2
-            binding.scoreTxv.text=Storage.score.toString()
+            gameViewModel.incorrectAnswer()
+            binding.scoreTxv.text=gameViewModel.score.value.toString()
             activity?.let { ContextCompat.getColor(it, R.color.red) }
                 ?.let { button.setBackgroundColor(it) }
             disableButton()
@@ -145,12 +151,12 @@ class GameFragment : Fragment() {
     }
 
     private fun dice() {
-        a=Storage.randomNumberA()
-        b=Storage.randomNumberB()
+        a=gameViewModel.randomNumberA()
+        b=gameViewModel.randomNumberB()
         mode=a%b
         binding.aNumberTxv.text = a.toString()
         binding.bNumberTxv.text = b.toString()
-        binding.scoreTxv.text=Storage.score.toString()
+        binding.scoreTxv.text=gameViewModel.score.value.toString()
         val numRandom = (0..3).random()
         setTextButton(numRandom)
 

@@ -6,8 +6,8 @@ import com.example.game.Storage
 
 class GameViewModel:ViewModel() {
 
-    val score = MutableLiveData<Int>()
-    val questionNumber = MutableLiveData<Int>()
+    val score = MutableLiveData<Int>(0)
+    val questionNumber = MutableLiveData<Int>(1)
     val maxScore = MutableLiveData<Int>(0)
 
     fun setScore(myScore:Int){
@@ -16,6 +16,18 @@ class GameViewModel:ViewModel() {
     }
     fun setQuestionNumber(qNumber:Int){
         questionNumber.value = qNumber
+    }
+    fun addQuestionNumber(){
+        questionNumber.value = questionNumber.value?.plus(1)
+    }
+    fun reset(){
+        questionNumber.value = 1
+    }
+    fun correctAnswer(){
+        score.value = score.value?.plus(5)
+    }
+    fun incorrectAnswer(){
+        score.value = score.value?.minus(2)
     }
     private fun setMaxScore(myScore: Int){
         if (myScore > maxScore.value!!){
