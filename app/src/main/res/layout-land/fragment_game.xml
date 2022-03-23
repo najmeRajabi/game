@@ -7,23 +7,44 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/score_txv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:textColor="@color/orange"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@id/coin_imv"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+        android:id="@+id/coin_imv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/coin_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/score_txv"
+        app:layout_constraintTop_toTopOf="@id/score_txv"
+        app:layout_constraintBottom_toBottomOf="@id/score_txv"/>
+
 
 
     <TextView
         android:id="@+id/aNumber_txv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:textSize="20sp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/leftOver"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/bNumber_txv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/bNumber_txv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:textSize="20sp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +68,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         app:layout_constraintEnd_toStartOf="@+id/answer2_btn"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/leftOver">
 
@@ -58,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/answer3_btn"
         app:layout_constraintStart_toEndOf="@+id/answer1_btn"
         app:layout_constraintTop_toBottomOf="@id/leftOver">
 
@@ -68,10 +88,10 @@
         android:id="@+id/answer3_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/answer4_btn"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toEndOf="@+id/answer4_btn"
-        app:layout_constraintTop_toBottomOf="@id/answer2_btn">
+        app:layout_constraintStart_toEndOf="@+id/answer2_btn"
+        app:layout_constraintTop_toBottomOf="@id/leftOver">
 
     </com.google.android.material.button.MaterialButton>
 
@@ -79,38 +99,24 @@
         android:id="@+id/answer4_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/answer3_btn"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/answer1_btn">
+        app:layout_constraintStart_toEndOf="@id/answer3_btn"
+        app:layout_constraintTop_toBottomOf="@id/leftOver">
 
     </com.google.android.material.button.MaterialButton>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/dice_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dice"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/dice"
+        app:backgroundTintMode="multiply"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@id/answer3_btn"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="1dp" />
 
-    <TextView
-        android:id="@+id/score_txv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="315dp"
-        tools:layout_editor_absoluteY="619dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginStart="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

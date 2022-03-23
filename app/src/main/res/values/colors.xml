@@ -11,8 +11,8 @@
     <color name="green">#388E3C</color>
     <color name="red">#D32F2F</color>
 
-    <color name="_white">#F7FD04</color>
-    <color name="_white2">#F9B208</color>
+    <color name="yellow">#F7FD04</color>
+    <color name="orange">#F9B208</color>
     <color name="purple_500">#F98404</color>
     <color name="purple_700">#FC5404</color>
 </resources>

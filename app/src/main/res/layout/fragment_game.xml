@@ -7,22 +7,44 @@
     android:layout_height="match_parent"
     tools:context=".GameFragment">
 
+    <TextView
+        android:id="@+id/score_txv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:textColor="@color/orange"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@id/coin_imv"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+        android:id="@+id/coin_imv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/coin_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/score_txv"
+        app:layout_constraintTop_toTopOf="@id/score_txv"
+        app:layout_constraintBottom_toBottomOf="@id/score_txv"/>
+
 
 
     <TextView
         android:id="@+id/aNumber_txv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/leftOver"
+
+        app:layout_constraintBottom_toTopOf="@+id/bNumber_txv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toTopOf="@id/guideline4" />
 
     <TextView
         android:id="@+id/bNumber_txv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:textSize="20sp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,9 +108,10 @@
     </com.google.android.material.button.MaterialButton>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/dice_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dice"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/dice"
+        app:backgroundTintMode="multiply"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="40dp"
@@ -101,15 +124,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="90dp" />
 
-    <TextView
-        android:id="@+id/score_txv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="315dp"
-        tools:layout_editor_absoluteY="619dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
