@@ -40,20 +40,19 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        if(savedInstanceState!= null){
-//            binding.aNumberTxv .text = savedInstanceState.getString("A")
-//            binding.bNumberTxv .text = savedInstanceState.getString("B")
-//            binding.answer1Btn .text = savedInstanceState.getString("Button1")
-//            binding.answer2Btn .text = savedInstanceState.getString("Button2")
-//            binding.answer3Btn .text = savedInstanceState.getString("Button3")
-//            binding.answer4Btn .text = savedInstanceState.getString("Button4")
-//            binding.answer1Btn.isEnabled = savedInstanceState.getBoolean("Enable")
-//            binding.answer2Btn.isEnabled = savedInstanceState.getBoolean("Enable")
-//            binding.answer3Btn.isEnabled = savedInstanceState.getBoolean("Enable")
-//            binding.answer4Btn.isEnabled = savedInstanceState.getBoolean("Enable")
-//            binding.scoreTxv.text= savedInstanceState.getString("Score")
-//            Storage.questionNumber= savedInstanceState.getInt("questionNumber")
-//        }
+        if(savedInstanceState!= null){
+            binding.aNumberTxv .text = savedInstanceState.getString("A")
+            binding.bNumberTxv .text = savedInstanceState.getString("B")
+            binding.answer1Btn .text = savedInstanceState.getString("Button1")
+            binding.answer2Btn .text = savedInstanceState.getString("Button2")
+            binding.answer3Btn .text = savedInstanceState.getString("Button3")
+            binding.answer4Btn .text = savedInstanceState.getString("Button4")
+            binding.answer1Btn.isEnabled = savedInstanceState.getBoolean("Enable")
+            binding.answer2Btn.isEnabled = savedInstanceState.getBoolean("Enable")
+            binding.answer3Btn.isEnabled = savedInstanceState.getBoolean("Enable")
+            binding.answer4Btn.isEnabled = savedInstanceState.getBoolean("Enable")
+
+        }
 
 
 
@@ -66,13 +65,8 @@ class GameFragment : Fragment() {
         binding.diceBtn.setOnClickListener {
             gameViewModel.addQuestionNumber()
             if (gameViewModel.questionNumber.value!! >=6){
-//                if (Storage.maxScore<Storage.score){  // in view model
-//                    Storage.maxScore=Storage.score
-//                }
                 gameViewModel.resetQNumber()
                 findNavController().navigate(R.id.action_gameFragment_to_resultFragment)
-//                val intent= Intent(activity,Activity2::class.java)
-//                startActivity(intent)
             }
             else {
                 for (button in btnArray) {
@@ -86,22 +80,17 @@ class GameFragment : Fragment() {
 
     }
 
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        outState.putString("A" , binding.aNumberTxv .text.toString())
-//        outState.putString("B" , binding.bNumberTxv .text.toString())
-//        outState.putString("Button1" , binding.answer1Btn .text.toString())
-//        outState.putString("Button2" , binding.answer2Btn .text.toString())
-//        outState.putString("Button3" , binding.answer3Btn .text.toString())
-//        outState.putString("Button4" , binding.answer4Btn .text.toString())
-//        outState.putString("Score" , binding.scoreTxv.text.toString())
-//        gameViewModel.questionNumber.value?.let { outState.putInt("questionNumber" , it) }
-//        outState.putBoolean("Enable" , binding.answer4Btn.isEnabled)
-//        for (button in btnArray){
-//            var s=button.isEnabled
-//            var x =button.background
-//        }
-//        super.onSaveInstanceState(outState)
-//    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("A" , binding.aNumberTxv .text.toString())
+        outState.putString("B" , binding.bNumberTxv .text.toString())
+        outState.putString("Button1" , binding.answer1Btn .text.toString())
+        outState.putString("Button2" , binding.answer2Btn .text.toString())
+        outState.putString("Button3" , binding.answer3Btn .text.toString())
+        outState.putString("Button4" , binding.answer4Btn .text.toString())
+        outState.putBoolean("Enable" , binding.answer4Btn.isEnabled)
+
+        super.onSaveInstanceState(outState)
+    }
 
 
     private fun setTextButton(number:Int){
@@ -119,7 +108,7 @@ class GameFragment : Fragment() {
     private fun correctAnswer(button: Button){
         if(button.text==mode.toString()){
             //Toast.makeText(this,"correct",Toast.LENGTH_SHORT).show()
-            gameViewModel.correctAnswer()
+            gameViewModel.addScore()
             binding.scoreTxv.text=gameViewModel.score.value.toString()
             activity?.let { ContextCompat.getColor(it, R.color.green) }
                 ?.let { button.setBackgroundColor(it) }
@@ -127,7 +116,7 @@ class GameFragment : Fragment() {
             disableButton()
         } else{
             //Toast.makeText(this,"incorrect",Toast.LENGTH_SHORT).show()
-            gameViewModel.incorrectAnswer()
+            gameViewModel.removeScore()
             binding.scoreTxv.text=gameViewModel.score.value.toString()
             activity?.let { ContextCompat.getColor(it, R.color.red) }
                 ?.let { button.setBackgroundColor(it) }
@@ -149,8 +138,8 @@ class GameFragment : Fragment() {
     }
 
     private fun dice() {
-        a=gameViewModel.randomNumberA()
-        b=gameViewModel.randomNumberB()
+        a= gameViewModel.randomNumberA()
+        b= gameViewModel.randomNumberB()
         mode=a%b
         binding.aNumberTxv.text = a.toString()
         binding.bNumberTxv.text = b.toString()

@@ -2,7 +2,6 @@ package com.example.game.com.example.game
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.game.Storage
 
 class GameViewModel:ViewModel() {
 
@@ -25,10 +24,10 @@ class GameViewModel:ViewModel() {
     fun resetScore(){
         score.value = 0
     }
-    fun correctAnswer(){
+    fun addScore(){
         score.value = score.value?.plus(5)
     }
-    fun incorrectAnswer(){
+    fun removeScore(){
         score.value = score.value?.minus(2)
     }
     fun setMaxScore(){
@@ -37,21 +36,15 @@ class GameViewModel:ViewModel() {
         }
     }
 
-    var a =-1
-    var b =-1
     fun randomNumberA():Int{
-        a = (1 .. 100).random()
-        return a
+        return  (1 .. 100).random()
     }
     fun randomNumberB():Int{
+        return (1 .. 10).random()
 
-        b = (1 .. 10).random()
-        return b
     }
     fun getRandom():Int{
         return (1 .. 10).random()
     }
-    fun answer():Int{
-        return a % b
-    }
+
 }

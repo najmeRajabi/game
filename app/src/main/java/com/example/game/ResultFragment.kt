@@ -35,7 +35,7 @@ class ResultFragment : Fragment() {
     private fun initView() {
         resultViewModel.setMaxScore()
         binding.scoreFinalTxv.text="your score is  ${resultViewModel.score.value.toString()}"
-        binding.record .text="max score is  ${resultViewModel.maxScore.value.toString()}"
+        binding.recordTxv.text="max score is  ${resultViewModel.maxScore.value.toString()}"
 
         binding.exitBtn.setOnClickListener {
             resultViewModel.resetQNumber()
